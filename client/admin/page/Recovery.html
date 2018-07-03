@@ -1,0 +1,83 @@
+{% extends 'simple.html' %} {% block header %}
+
+<title>Lama Recovery</title>
+<meta name="description" content="Recover password for Admin interface for lamaDB."> {% endblock %} {% block body %} {% if !code %}
+<div class="row">
+	<div class="abs ov-y">
+		<div class="tab landing-content">
+			<div class="col ta-c login-page">
+				<div class="inline-auth">
+					<a href="/" class="logo-row m_auth">
+						<img class="logo" src="/admin/img/logo.png" alt="">
+						<div class="land-title">LamaDB</div>
+					</a>
+					<div class="sub-title">an honorofic title applied to a spiritual leader</div>
+					<h1>Password recovery</h1>
+					<div class="auth-text">
+						<p class="ta-c">If you have lost your account password, simply enter your email address below. Directions for resetting your password will be emailed to the address on file.</p>
+					</div>
+
+					<div>
+
+						<form action="/Recovery" method="POST" class="login-form m_no-border">
+							<h2>Password recovery</h2>
+							<label>
+								<h4>Email</h4>
+								<input tabindex="1" type="email" name="email" placeholder="Add your email">
+							</label>
+							<div class="ta-r mt2 mb2">
+								<a class="fl fp-link" href="/Login">Back to login</a>
+								<button tabindex="3" type="submit" class="btn">Recover</button>
+							</div>
+							<!-- <div class="wrong-massage">
+								<div>Email do not registred</div>
+							</div> -->
+						</form>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %} {% if code %}
+<div class="row">
+	<div class="abs ov-y">
+		<div class="tab">
+			<div class="col-m ta-c login-page">
+
+				<div class="logo-row m_auth">
+					<img class="logo" src="/admin/img/logo.png" alt="">
+					<div class="logo-row_text">MongoManage</div>
+				</div>
+				<h1>Password recovery</h1>
+				<div class="auth-text">
+					<p class="ta-c">Write your new password below</p>
+				</div>
+
+				<div>
+
+					<form action="/ChangePass" method="POST" class="login-form m_no-border">
+						<h2>Password recovery</h2>
+						<input type="text" name="code" value="{{{code}}}" style="visibility: hidden;">
+						<label>
+							<h4>Password</h4>
+							<input tabindex="1" type="password" name="password" minlength="6">
+						</label>
+						<div class="ta-r mt2 mb2">
+							<a class="fl fp-link" href="/Login">Back to login</a>
+							<button tabindex="3" type="submit" class="btn">Change</button>
+						</div>
+						<!-- <div class="wrong-massage">
+							<div>Password to short</div>
+						</div> -->
+					</form>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %} {% endblock %}

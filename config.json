@@ -1,0 +1,25 @@
+{
+	"name": "MongoDB Manager",
+	"description": "PhpMyAdmin equvalent for MonboDB.",
+	"icon": "/client/admin/img/favicon.png",
+	"prefix": "mmFix",
+	"license": "MIT",
+	"port": 6548,
+	"session": 1200000,
+	"production": false,
+	"root": "cms",
+	"customRootLink": true,
+	"report": ["savasan.ozgur@gmail.com"],
+	"mongo":{
+		"host": "localhost",
+		"port": 27017,
+		"db": "lamadb"
+	},
+	"passport": {
+		"local": {
+			"successRedirect": "/",
+			"failureRedirect": "/"
+		}
+	},
+	"ignoreParts": []
+}

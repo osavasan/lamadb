@@ -1,0 +1,73 @@
+//This file contains all application-wide Sass variables.
+// COLORS
+
+$primary: #2C3E50;
+
+$primary-l: #334556;
+
+$primary-ll: #94C0DC;
+$primary-d: #1d2934;
+$primary-dd: #1c6696;
+
+$accent: #26B99A;
+
+$accent-l: #fc796f;
+
+$accent-d: #27ab8f;
+$accent-dd: #21937b;
+
+$link: $primary-d;
+$link-hover: #f34235;
+
+$text-d: #2C3E50;
+
+$text: #73879C;
+
+$text-l: #F2F5F7;
+
+$text-ll: #dee6e8;
+$text-w: #ffffff;
+
+$divider: #DCE4EC;
+
+$danger: #D9534F;
+$danger-d: #ba423f;
+
+$attention: #F0AD4E;
+$attention-d: #de9a3a;
+$attention-dd: #c6872f;
+
+$blue: #5BC0DE;
+$blue-d: #4cb3d1;
+$blue-dd: #39a7c7;
+	
+$bg: #ffffff;
+$bg-d: #ECF0F1;
+$bg-dd: #d4dbdd;
+// FONTS
+$ff-title: 'Asimov', sans-serif;
+
+$ff-base: 'Lato', sans-serif;
+
+$ff-mono: 'Cousine', monospace;
+$fs-xs: 13px;
+$fs-s: 13px;
+
+$fs: 15px;
+
+$fs-l: 19px;
+$fs-xl: 23px;
+// SPACING
+
+$space: 5px;
+
+$space05: $space / 2;
+$space15: $space * 1.5;
+$space2: $space * 2;
+// SHADOWS
+$shadow-xxs: 1px 1px 2px gray;
+$shadow-xs: 0 4px 5px -2px rgba(0,0,0,.2), 0 7px 10px 1px rgba(0,0,0,.14), 0 2px 16px 1px rgba(0,0,0,.12);
+$shadow-s: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+$shadow-m: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+$shadow-l: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+$shadow-xl: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);

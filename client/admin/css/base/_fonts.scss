@@ -1,0 +1,28 @@
+// This file contains all @font-face declarations
+
+// title font
+@font-face {
+	font-family: Asimov;
+	src: url(/public/fonts/Asimov.otf);
+}
+
+// base font
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+// monospace font (inputs etc.)
+@import url('https://fonts.googleapis.com/css?family=Cousine');
+
+.title {
+	font-family: 'Abel', sans-serif;
+	padding-bottom: 0.2em;
+}
+
+.sub-text {
+	color: $text-l;
+	font-size: $fs-xs;
+}
+
+.light-text {
+	color: $text-l;
+	font-size: $fs-s;
+}

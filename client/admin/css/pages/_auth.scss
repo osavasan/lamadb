@@ -1,0 +1,71 @@
+.logo {
+	display: inline-block;
+	vertical-align: top;
+	height: 50px;
+	width: auto;
+}
+
+.login-page {
+	padding-bottom: 7%;
+	padding-top: 10px;
+	background: url('/admin/img/background-b.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.auth-text {
+	display: inline-block;
+	vertical-align: top;
+	max-width: 600px;
+	padding-bottom: 30px;
+	color: $text;
+}
+
+.login-form {
+	position: relative;
+	display: inline-block;
+	vertical-align: top;
+	width: 380px;
+	padding: 0 40px 20px;
+	&:first-of-type {
+		border-right: 2px solid $text-l;
+	}
+	&.m_no-border {
+		border-right: none;
+	}
+	.wrong-massage {
+		color: $danger;
+		position: absolute;
+		top: calc(100% - 20px);
+		left: 0;
+		width: 100%;
+		padding: 0 40px;
+		text-align: center;
+	}
+}
+.fp-link {
+	display: inline-block;
+	text-decoration: none;
+	margin-top: 6px;
+	&:hover {
+		color: $text-d;
+	}
+}
+@media (max-width: 780px) {
+	.login-form {
+		&:first-of-type {
+			border-right: none;
+		}
+	}
+}
+
+.inline-auth {
+	background: rgba(255,255,255,0.9);
+	display: inline-block;
+	vertical-align: top;
+}    
+.sub-title {
+	font-size: 11px;
+	margin-top: -12px;
+	margin-bottom: 8px;
+}    

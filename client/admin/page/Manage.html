@@ -1,0 +1,243 @@
+{% extends 'ng.html' %} {% block header %}
+
+	<title>LamaDB Smart Manage</title>
+	<meta name="description" content="Admin interface for lamaDB.">
+
+{% endblock %} {% block body %}
+
+<div class="row" ng-controller="DBManager" ng-click="hideEdits();">
+	<div class="tab">
+		<div class="col sidebar">
+			<div class="tab">
+				<div class="row-1">
+					<div class="tab">
+						<div class="col-m logo-row">
+							<img class="logo" src="admin/img/logo.png" alt="">
+							<div class="logo-row_text">Lama DB</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="tab">
+						<div class="abs ov-y" ng-init="sd.databases={{{databases|json}}}; selectDocuments();">
+							<!-- row of one DB connection -->
+							<div class="db-row" ng-repeat="db in sd.databases" ng-init="setDBsize(db)">
+								<!-- Name of DB, m_active class on click  -->
+								<div class="db-row_title" ng-class="{m_active: db._id == sd.database._id}" ng-click='db.show=!db.show; selectDocuments(db); calcDatabase(db);'>
+									<i class="icon icon-db"></i>
+									<span>{{db.name}} [{{db.size|calcStorage}}]</span>
+									<button class="btn m_icon-btn m_danger fr" ng-click="sd.selectedForDeleteDB.db=db; sd.selectedForDeleteDB.$index=$index;"><i class="icon icon-trash"></i></button>
+								</div>
+								<!-- File tree of DB, all span tags must give m_active class on click to upper li tag -->
+								<div class="db-row_tree" ng-show="db.show">
+									<ul>
+										<li ng-class="{m_active: db.collection}">
+											<i ng-click="db.collection=!db.collection; selectDocuments(db);" class="icon icon-folder" ng-if="!db.collection"></i>
+											<i ng-click="db.collection=!db.collection; selectDocuments(db);" class="icon icon-folder-open" ng-if="db.collection"></i>
+											<span ng-click="db.collection=!db.collection; selectDocuments(db);">Collections ({{db.collections.length}})</span>
+											<ul>
+												<li class="ta-r h20" ng-repeat="collection in db.collections" ng-click="selectDocuments(db, collection);  calcCollection(db, collection); hideEdits(collection._id); $event.stopPropagation();" ng-class="{m_active: collection._id==db.collection._id}">
+													<i class="icon icon-file fl pt"></i>
+													<span class="ta-l" ng-if="!collection.edit" ng-class="{m_active: collection._id == sd.collection._id}">{{collection.name}} [{{collection.size|calcStorage}}]</span>
+													<label ng-class="{m_active: collection.edit}">
+														<input class="m_small" ng-show="collection.edit" type="text" ng-model="collection.newName" ng-keyup="$event.keyCode==13&&renameCollection(db, collection);">
+														<i class="btn m_icon-btn icon icon-edit" ng-if="!collection.edit" ng-click="collection.edit=true;"></i>
+													</label>
+													<button class="btn m_icon-btn" ng-if="collection.edit" ng-click="renameCollection(db, collection);"><i class="icon icon-ok"></i></button>
+													<button class="btn m_icon-btn m_danger" ng-click="sd.selectedForDeleteCL.db=db; sd.selectedForDeleteCL.collection=collection;  sd.selectedForDeleteCL.$index=$index; "><i class="icon icon-trash"></i></button>
+												</li>
+											</ul>
+										</li>
+										<!-- <li ng-class="{m_active: db.user}">
+											<i ng-click="db.user=!db.user" class="icon icon-folder" ng-if="!db.user"></i>
+											<i ng-click="db.user=!db.user" class="icon icon-folder-open" ng-if="db.user"></i>
+											<span ng-click="db.user=!db.user">Users ({{db.users.length}})</span>
+											<ul>
+												<li ng-repeat="user in db.users">
+													<i class="icon icon-folder"></i>
+													<i class="icon icon-folder-open"></i>
+													<span>{{user.name}}</span>
+												</li>
+											</ul>
+										</li> -->
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row-1">
+					<div class="tab pt2 pl2 pr2 pb input-group">
+						<input class="m_dark" type="text" placeholder="New DataBase" ng-model="newDBname" ng-keyup="$event.keyCode==13&&createDB(newDBname);">
+						<button class="btn" ng-click="createDB(newDBname);">Create</button>
+					</div>
+				</div>
+				<div class="row-1">
+					<div class="tab ta-c pb2 pr2 pl2 pt">
+						<a class="btn m_blue m_w100 m_p3" href="/api">Api documentation</a></div>
+				</div>
+			</div>
+		</div>
+		<div class="col">
+			<div class="tab">
+				<div class="abs ov-y">
+					<div class="tab" ng-if="!sd.collection.name">
+						<div class="row-1">
+							<div class="icon-navs">
+								<div class="icon-navs_fakeitem"></div>
+								<a href="/api/user/logout" class="icon-navs_item m_logout">
+									<i class="icon icon-logout3"></i>
+									<span>Log out</span>
+								</a>
+							</div>
+						</div>
+						<div class="row">
+							<div class="tab p4">
+								<h4 ng-if='!sd.database'>Please create your first database</h4>
+								<div ng-if='!sd.database' class="input-group">
+									<input class="m_dark" type="text" placeholder="New DataBase" ng-model="newDBname" ng-keyup="$event.keyCode==13&&createDB(newDBname);">
+									<button class="btn" ng-click="createDB(newDBname);">Create</button>
+								</div>
+
+								<h3 ng-if='sd.database'>Collection maintenance</h3>
+								<h4 ng-if='sd.database'>Please select one collection</h4>
+								<h4 ng-if='sd.database'>Or you can create new one in db: {{sd.database.name}}</h4>
+								<div ng-if='sd.database' class="input-group">
+									<input type="text" ng-model="sd.newCollection" placeholder="collection Name" ng-keyup="$event.keyCode==13&&createNewCollection()">
+									<button class="btn" ng-click="createNewCollection()">Create</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="tab" ng-if="sd.collection.name">
+						<div class="row-1"></div>
+						<div class="row-1">
+							<div class="icon-navs">
+								<div class="icon-navs_item">
+									<i class="icon icon-db"></i>
+									<span>{{sd.database.name}}</span>
+								</div>
+								<div class="icon-navs_item">
+									<i class="icon icon-table"></i>
+									<span>{{sd.collection.name}}</span>
+								</div>
+								<div class="icon-navs_item m_copy" ngclipboard data-clipboard-text="{{sd.database._id}}">
+									<!-- <i class="icon icon-id"></i> -->
+									<span>Project ID: </span>
+									<span>{{sd.database._id}}</span>
+								</div>
+								<div class="icon-navs_item m_copy" ngclipboard data-clipboard-text="{{{ID}}}">
+									<!-- <i class="icon icon-user"></i> -->
+									<span>User ID: </span>
+									<span>{{{ID}}}</span>
+								</div>
+								<div class="icon-navs_fakeitem"></div>
+								<a href="/api/user/logout" class="icon-navs_item m_logout">
+									<i class="icon icon-logout3"></i>
+									<span>Log out</span>
+								</a>
+							</div>
+						</div>
+						<div class="row">
+							<div class="tab p2">
+								<!-- DOCS -->
+								<div class="col docs">
+									<div class="tab">
+										<div class="row-1">
+											<div class="pb2 pl pr2">
+												<div class="tab">
+													<button class="btn mr2" ng-click='createDoc()'>Add Empty Doc</button>
+													<div class="docs-title">{{sd.docs.length}} Docs</div>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="tab">
+												<div class="abs ov-y pl">
+													<div class="doc-item" ng-repeat="doc in sd.docs">
+														<code class="doc-item_code" ng-class="{m_active: sd.index==$index, m_saved: sd.status[$index].save}" ng-click="sd.index=$index; sd.setNewDoc(doc);">({{$index+1}}) ObjectId("{{doc._id}}")</code>
+														<i class="icon icon-close close-i doc-item_remove" ng-click="sd.selectedForDeleteDC.doc = doc; sd.selectedForDeleteDC.$index = $index;"></i>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col">
+									<div class="tab">
+										<div class="abs ov-y pl2 pr2">
+											<div class="mb2 q-editor-box">
+												<div class="color-accent">Enter your search filter</div>
+												<div class="mb" ui-ace="{useWrapMode : true, theme:'monokai', mode: 'json', onLoad: sd.queryLoaded, onChange: sd.searchChanged}"></div>
+												<div class="ta-r">
+													<div class="tab">
+														<div class="query-title">Query</div>
+														<span ng-if="sd.disableSearch" class="warring-text">not valid json</span>
+														<button class="btn" ng-click="querySearch()" ng-class="{m_disable: sd.disableSearch}">Search</button>
+														<button class="btn ml2 m_blue" ng-click="selectDocuments(sd.database, sd.collection)">Clear</button>
+													</div>
+												</div>
+											</div>
+											<div class="pos-r" ng-if="sd.index||sd.index==0">
+												<div class="document-title">Document</div>
+												<div class="mb" ng-if="sd.index||sd.index==0" ui-ace="{useWrapMode : true, theme:'monokai', mode: 'json', onLoad: sd.aceLoaded, onChange: sd.docChanged}"></div>
+												<div class="ta-r" ng-if="sd.index||sd.index==0">
+													<div class="tab">
+														<div class="query-title m_small">ObjectId("{{sd.docs[sd.index]._id}}")</div>
+														<span ng-if="sd.status[sd.index].noSave" class="warring-text">not valid json</span>
+														<button class="btn" ng-class="{m_disable: sd.status[sd.index].noSave||sd.status[sd.index].noSaveNeed}" ng-click="saveDoc()">Save</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="alerts-wrapper">
+		<div class="alert" ng-if="sd.manyDatabases">
+			<div class="p2">You cannot create more databases.</div>
+		</div>
+		<div class="alert" ng-if="sd.manyCollections">
+			<div class="p2">You cannot create more collections.</div>
+		</div>
+		<div class="alert" ng-if="sd.sameNameDatabase">
+			<div class="p2">You cannot create database with existing name.</div>
+		</div>
+		<div class="alert" ng-if="sd.selectedForDeleteDB.db">
+			<div class="p2">Are you sure that you want to remove {{sd.selectedForDeleteDB.db.name}} database?</div>
+			<div class="p2">
+				<button class="btn m_danger mr" ng-click="removeDatabase(sd.selectedForDeleteDB.db, sd.selectedForDeleteDB.$index); sd.selectedForDeleteDB.db=null">Yes</button>
+				<button class="btn ml" ng-click="sd.selectedForDeleteDB.db=null">No</button>
+			</div>
+		</div>
+		<div class="alert" ng-if="sd.selectedForDeleteCL">
+			<div class="p2">Are you sure that you want to remove {{sd.selectedForDeleteCL.collection.name}} collection?</div>
+			<div class="p2">
+				<button class="btn m_danger mr" ng-click="removeCollection(sd.selectedForDeleteCL.db, sd.selectedForDeleteCL.collection, sd.selectedForDeleteCL.$index); sd.selectedForDeleteCL=null;">Yes</button>
+				<button class="btn ml" ng-click="sd.selectedForDeleteCL=null;">No</button>
+			</div>
+		</div>
+		<div class="alert" ng-if="sd.selectedForDeleteDC">
+			<div class="p2">Are you sure that you want to remove document with  ObjectId({{sd.selectedForDeleteDC.doc._id}})?</div>
+			<div class="p2">
+				<button class="btn m_danger mr" ng-click="removeDoc(sd.selectedForDeleteDC.doc, sd.selectedForDeleteDC.$index); sd.selectedForDeleteDC=null;">Yes</button>
+				<button class="btn ml" ng-click="sd.selectedForDeleteDC=null;">No</button>
+			</div>
+		</div>
+		<div class="alert" ng-repeat="alert in alerts">
+			<div class="p2">{{alert.message}}</div>
+			<div class="p2">{{alert.sec}}</div>
+			<div class="p2">
+				<button class="btn ml" ng-click="alert.undo();">Undo</button>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

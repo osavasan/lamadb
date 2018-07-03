@@ -1,0 +1,69 @@
+// layout with two collumns: left main content and right sidebar. No body scroll. Take all height of row.
+// content sector
+.content-col2 {
+	@include position(absolute, $top: 0, $left: 0);
+	display: inline-block;
+	vertical-align: top;
+	width: calc(100% - 280px);
+	height: calc(100% - 24px);
+	transition: all 0.3s;
+	&.m_active {
+		width: 100%;
+	}
+	&.m_if-sb480 {
+		width: calc(100% - 480px);
+		&.m_active {
+			width: 100%;
+		}
+	}
+	&_card {
+		background: $bg;
+		box-shadow: 1px 1px 4px #333333;
+		text-align: center;
+		transition: all 0.3s;
+		margin: $space;
+		display: inline-block;
+		vertical-align: top;
+		width: calc(100% - 24px);
+		height: 100%;
+		margin: $space;
+		overflow: auto;
+		iframe {
+			display: inline-block;
+			border: none;
+			box-shadow: $shadow-xs;
+			transition: all 0.3s;
+		}
+	}
+}
+
+// sidebar sector
+.sidebar-col2 {
+	@include position(absolute, $top: 0, $right: -280px);
+	display: inline-table;
+	vertical-align: top;
+	overflow: auto;
+	width: 280px;
+	height: 100%;
+	background: $bg-d;
+	border-left: 2px solid $primary;
+	font-size: 16px;
+	transition: all 0.3s;
+	&.m_active {
+		right: 0;
+	}
+	&_middle {
+		width: 100%;
+		height: calc(100% - 100px);
+		display: block;
+		overflow: auto;
+		padding-bottom: 2rem;
+	}
+	&.m_if-sb480 {
+		right: -480px;
+		width: 480px;
+		&.m_active {
+			right: 0;
+		}
+	}
+}

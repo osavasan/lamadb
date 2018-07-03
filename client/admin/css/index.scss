@@ -1,0 +1,34 @@
+@charset 'UTF-8';
+
+// 1. Utils - configuration and helpers
+@import 'utils/functions',
+'utils/variables',
+'utils/mixins';
+
+// 3. Base - some basic stuff
+@import 'base/base',
+'base/normalize',
+'base/fonts',
+'base/helpers',
+'base/tags',
+'base/short-classes',
+'base/shame';
+
+// 4. Layout - some related sections
+@import 'layout/topbar',
+'layout/two-cols',
+'layout/table-grid';
+
+// 5. modules - reuseble modules
+@import 'modules/icon-navs',
+'modules/input-g',
+'modules/alerts',
+'modules/close-icon',
+'modules/btn';
+
+// 6. Page - specific styles for separete pages
+@import 
+'pages/landing',
+'pages/auth',
+'pages/api',
+'pages/manage';

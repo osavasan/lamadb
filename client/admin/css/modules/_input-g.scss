@@ -1,0 +1,22 @@
+.input-group {
+	font-size: 0;
+	max-width: 600px;
+	input {
+		width: calc(100% - 60px) !important;
+		border-right: none !important;
+		border-bottom-right-radius: 0 !important;
+		border-top-right-radius: 0 !important;
+		&:focus {
+			border-right: none !important;
+		}
+	}
+	button {
+		width: 60px !important;
+		padding-left: 0;
+		padding-right: 0;
+		min-width: 60px;
+		height: 35px;
+		border-bottom-left-radius: 0;
+		border-top-left-radius: 0;
+	}
+}

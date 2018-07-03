@@ -1,0 +1,110 @@
+a.btn {
+	text-decoration: none;
+	color: $text-w;
+}
+.btn {
+	position: relative;
+	display: inline-block;
+	vertical-align: top;
+	min-width: 100px;
+	padding: 6px 9px;
+	background: $accent;
+	color: $text-w;
+	border: 1px solid $accent-dd;
+	border-radius: 3px;
+	font-family: $ff-base;
+	font-size: $fs-s;
+	letter-spacing: 1px;
+	line-height: 1.5;
+	text-align: center;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+	transition: all 0.1s;
+	cursor: pointer;
+	&.m_disable {
+		cursor: not-allowed;
+		opacity: 0.5;
+		&:hover,
+		&:focus {
+			background: $accent;
+		}
+	}
+	&:hover,
+	&:focus {
+		background: $accent-d;
+	}
+	&:active {
+		background: $accent-dd;
+		-webkit-box-shadow: none;
+		box-shadow: none;
+	}
+	&.m_accent {
+		background: $accent;
+		border-bottom: 2px solid $accent-d;
+		&:hover {
+			border-bottom: 2px solid $accent-dd;
+		}
+	}
+	&.m_danger {
+		background: $danger;
+		border: 1px solid $danger-d;
+		&:hover,
+		&:focus {
+			background: $danger-d;
+		}
+	}
+	&.m_attention {
+		background: $attention;
+		border: 1px solid $attention;
+		&:hover{
+			background: $attention-d;
+		}
+		&:focus {
+			background: $attention-dd;
+		}
+	}
+	&.m_blue {
+		background: $blue;
+		border: 1px solid $blue-dd;
+		&:hover {
+			background: $blue-d;
+		}
+		&:focus {
+			background: $blue-dd;
+		}
+	}
+	&.m_primary {
+		background: $primary-l;
+		border-color: $primary;
+		&:hover {
+			background: $primary;
+		}
+		&:focus {
+			background: $primary-d;
+		}
+	}
+	&.m_w100 {
+		width: 100%;
+	}
+	&.m_p3 {
+		padding: 3px;
+	}
+	&.m_icon-btn {
+		border-radius: 0;
+		padding: 0px 0;
+		margin: 0;
+		width: 28px;
+		height: 24px;
+		min-width: 28px;
+		border: none;
+		&:hover,
+		&:focus {
+			border: none;
+		}
+		i {
+			font-size: 14px;
+		}
+	}
+}
+label.btn.m_icon-btn {
+	padding-top: 3px;
+}

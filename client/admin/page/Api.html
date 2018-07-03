@@ -1,0 +1,287 @@
+{% extends 'simple.html' %} {% block header %}
+
+<title>Mongo Smart Manage</title>
+<meta name="description" content="An open source admin user interface for your MongoDB."> {% endblock %} {% block body %}
+<div class="tab">
+	<div class="col api-sb">
+		<div class="tab">
+			<div class="row-1">
+				<div class="tab">
+					<div class="col-m logo-row">
+						<img class="logo" src="admin/img/logo.png" alt="">
+						<div class="logo-row_text">LamaDB</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="tab">
+					<div class="abs ov-y api-sb_abs">
+						<a class="api-sb-link" href="#apiFindData">1. Find Data</a><br>
+						<a class="api-sb-link" href="#apiInsertData">2. Insert Data</a><br>
+						<a class="api-sb-link" href="#apiUpdateData">3. Update Data</a><br>
+						<a class="api-sb-link" href="#apiRemoveData">4. Remove Data</a><br>
+						<a class="api-sb-link" href="#apiAggregateData">5. Aggregate Data</a><br>
+						<a class="api-sb-link" href="#apiCreateCollection">6. Create a Collection</a><br>
+						<a class="api-sb-link" href="#apiDropCollection">7. Drop a Collection</a><br>
+						<a class="api-sb-link" href="#apiCollectionStatistics">8. Show Collection Statistics</a><br>
+						<a class="api-sb-link" href="#apiDatabaseStatistics">9. Show Database Statistics</a><br>
+						<a class="api-sb-link" href="#apiCount">10. Count</a><br>
+						<a class="api-sb-link" href="#apiIndex">11. Index</a><br>
+					</div>
+				</div>
+			</div>
+			<div class="row-1">
+				<div class="tab ta-c p2">
+					<a class="btn m_blue m_w100 m_p3" href="/">Back</a></div>
+			</div>
+		</div>
+	</div>
+	<div class="col">
+		<div class="tab">
+			<div class="abs ov-y api-content">
+				<div class="api-section">
+					<h1 id="apiFindData">1. Find Data</h1>
+					<p>Find data using the following URL.</p>
+					<p class="m_post">POST: /{project_id}/{collection}/find</p>
+					<h4>PARAMETERS</h4>
+					<ul>
+						<li><b>gameApiKey:</b> The API key of your game.</li>
+						<li><b>collection:</b> Indicates which collection to perform the action against.</li>
+					</ul>
+					<h4>FORM DATA</h4>
+					<ul>
+						<li><b>query :</b> The query you want to execute in JSON form: To find players with displayName testUser the following JSON should be used {displayName : testUser}.</li>
+						<li><b>sort :</b> The JSON representation of the sort for the query: To sort by userName in ascending order the following JSON should be used {userName : 1}.</li>
+						<li><b>fields :</b> Allows you to limit the fields that are returned in the results. This is useful for collections with large document: To limit the results to only contain the userName and displayName the following JSON should be used : {userName : 1, displayName : 1}. 1 indicates inclusion and 0 indicates exclusion for a field. You cannot mix inclusion and exclusion in a single query.</li>
+						<li><b>skip :</b> The number of documents to skip, useful for paging in combination with limit.</li>
+						<li><b>limit :</b> The maximum number of documents to return. The maximum that the limit value can be set to is 10000.</li>
+					</ul>
+					<h4>RESPONSE EXAMPLE</h4>
+					<pre>[
+
+{
+
+"insert_user": {
+
+"$oid": "000000000000000000000000"
+
+}, "text": "hello_updated", "project_id": {
+"$oid": "111111111111111111111111"
+}, "insert_date": {
+"$date": 1487344566183
+}
+}
+]
+</pre>
+				</div>
+				<div class="api-section">
+					<h1 id="apiInsertData">2. Insert Data</h1>
+					<p>Insert data using the following URL.</p>
+					<p class="m_post">POST: /{project_id}/{collection}/insert</p>
+					<h4>PARAMETERS</h4>
+					<ul>
+						<li><b>gameApiKey :</b> The API key of your game.</li>
+						<li><b>collection :</b> Indicates which collection to perform the action against.</li>
+					</ul>
+					<h4>FORM DATA</h4>
+					<ul>
+						<li><b>document :</b> The JSON document to insert into the collection.</li>
+					</ul>
+					<h4>RESPONSE EXAMPLE</h4>
+					<pre>{
+
+"insert_user": {
+
+"$oid": "000000000000000000000000"
+
+}, "text": "hello_0", "project_id": {
+"$oid": "111111111111111111111111"
+}, "insert_date": {
+"$date": 1487344483596
+}, "_id": {
+"$oid": "58a6db23c979d31dfc15b685"
+}
+}</pre>
+				</div>
+				<div class="api-section">
+					<h1 id="apiUpdateData">3. Update Data</h1>
+					<p>Update data using the following URL.</p>
+					<p class="m_post">POST: /{project_id}/{collection}/update</p>
+					<h4>PARAMETERS</h4>
+					<ul>
+						<li><b>gameApiKey :</b> The API key of your game.</li>
+						<li><b>collection :</b> Indicates which collection to perform the action against</li>
+					</ul>
+					<h4>FORM DATA</h4>
+					<ul>
+						<li><b>query :</b> The selection criteria for the update. Use the same query selectors as used in the Find method.</li>
+						<li><b>update :</b> The modifications to apply.</li>
+						<li><b>upsert (optional) :</b> Set to true to create a new document when no document matches the query. Defaults to false.</li>
+					</ul>
+					<h4>RESPONSE EXAMPLE</h4>
+					<pre>{
+
+"updatedExisting": true, "nModified": 1, "ok": 1, "n": 1
+
+}
+</pre>
+				</div>
+				<div class="api-section">
+					<h1 id="apiRemoveData">4. Remove Data</h1>
+					<p>Remove data using the following URL.</p>
+					<p class="m_post">POST: /{project_id}/{collection}/remove</p>
+					<h4>PARAMETERS</h4>
+					<ul>
+						<li><b>gameApiKey :</b> The API key of your game.</li>
+						<li><b>collection :</b> Indicates which collection to perform the action against</li>
+					</ul>
+					<h4>FORM DATA</h4>
+					<ul>
+						<li><b>query :</b> The selection criteria for the Remove operate. All documents matching this criteria will be removed.</li>
+					</ul>
+					<h4>RESPONSE EXAMPLE</h4>
+					<pre>{
+
+"ok": 1, "n": 1
+
+}</pre>
+				</div>
+				<div class="api-section">
+					<h1 id="apiAggregateData">5. Aggregate Data</h1>
+					<p>Aggregate data using the following URL.</p>
+					<p class="m_post">POST: /{project_id}/{collection}/aggregate</p>
+					<h4>PARAMETERS</h4>
+					<ul>
+						<li><b>gameApiKey :</b> The API key of your game.</li>
+						<li><b>collection :</b> Indicates which collection to perform the action against</li>
+					</ul>
+					<h4>FORM DATA</h4>
+					<ul>
+						<li><b>pipeline :</b> A JSON array of pipeline commands. If you are supplying more than one pipeline stage you must wrap then within a JSON array.</li>
+					</ul>
+					<h4>RESPONSE EXAMPLE</h4>
+					<pre>[
+
+{
+
+"_id": "hello_updated", "len": 1
+
+}, {
+"_id": "hello_0", "len": 1
+}
+]</pre>
+				</div>
+				<div class="api-section">
+					<h1 id="apiCreateCollection">6. Create a Collection</h1>
+					<p>Create a collection using the following URL.</p>
+					<p class="m_post">POST: /{project_id}/{collection}/create</p>
+					<h4>PARAMETERS</h4>
+					<ul>
+						<li><b>gameApiKey :</b> The API key of your game.</li>
+						<li><b>collection :</b> Indicates which collection to perform the action against.</li>
+					</ul>
+					<h4>FORM DATA</h4>
+					<ul>
+						<li><b>collectionType :</b> 'script' for a runtime collection (not included in game snapshots) or 'meta' for a meta collection (included in game snapshots).</li>
+					</ul>
+
+					<h4>RESPONSE EXAMPLE</h4>
+					<pre>{
+
+"ok": 1
+
+}</pre>
+				</div>
+				<div class="api-section">
+					<h1 id="apiDropCollection">7. Drop a Collection</h1>
+					<p>Drop a collection using the following URL.</p>
+					<p class="m_post">POST: /{project_id}/{collection}/drop</p>
+					<h4>PARAMETERS</h4>
+					<ul>
+						<li><b>gameApiKey :</b> The API key of your game.</li>
+						<li><b>collection :</b> Indicates which collection to perform the action against. Note that runtime collections that you create have their names prefixed with 'script.' and meta collections that you create have their names prefixed with 'meta.'.</li>
+					</ul>
+					<h4>RESPONSE EXAMPLE</h4>
+					<pre>{
+
+"ns": "db_000000000000000000000000.new_collection", "ok": 1, "nIndexesWas": 1
+
+}</pre>
+				</div>
+				<div class="api-section">
+					<h1 id="apiCollectionStatistics">8. Show Collection Statistics</h1>
+					<p>Show collection statistics using the following URL.</p>
+					<p class="m_post">POST: /{project_id}/{collection}/stats</p>
+					<h4>PARAMETERS</h4>
+					<ul>
+						<li><b>gameApiKey :</b> The API key of your game.</li>
+						<li><b>collection :</b> Indicates which collection to perform the action against.</li>
+					</ul>
+					<h4>RESPONSE EXAMPLE</h4>
+					look at MongoDB docs
+				</div>
+				<div class="api-section">
+					<h1 id="apiDatabaseStatistics">9. Show Database Statistics</h1>
+					<p>Show database statistics using the following URL.</p>
+					<p class="m_post">POST: /{project_id}/dbstats</p>
+					<h4>PARAMETERS</h4>
+					<ul>
+						<li><b>gameApiKey :</b> The API key of your game.</li>
+						<li><b>collection :</b> Indicates which collection to perform the action against.</li>
+					</ul>
+					<h4>RESPONSE EXAMPLE</h4>
+					<pre>{
+
+"storageSize": 36864, "ok": 1, "avgObjSize": 113, "views": 0, "db": "db_000000000000000000000000", "indexes": 1, "objects": 2, "collections": 1, "numExtents": 0, "dataSize": 226, "indexSize": 36864
+
+}</pre>
+				</div>
+				<div class="api-section">
+					<h1 id="apiCount">10. Count</h1>
+					<p>Count the number of documents in a collection that match a Find query using the following URL.</p>
+					<p class="m_post">POST: /{project_id}/{collection}/count</p>
+					<h4>PARAMETERS</h4>
+					<ul>
+						<li><b>gameApiKey :</b> The API key of your game.</li>
+						<li><b>collection :</b> Indicates which collection to perform the action against.</li>
+					</ul>
+					<h4>FORM DATA</h4>
+					<ul>
+						<li><b>query :</b> The query you want to execute in JSON form: To find players with displayName testUser the following JSON should be used {displayName : testUser}.</li>
+					</ul>
+					<h4>RESPONSE EXAMPLE</h4>
+					<pre>{
+
+"count": 2
+
+}</pre>
+				</div>
+				<div class="api-section">
+					<h1 id="apiIndex">11. Index</h1>
+					<p>View the indexes that have been created for a Collection.</p>
+					<p class="m_post">POST: /{project_id}/{collection}/index</p>
+					<h4>PARAMETERS</h4>
+					<ul>
+						<li>gameApiKey : The API key of your game.</li>
+						<li>collection : Indicates which collection to perform the action against.</li>
+					</ul>
+					<h4>RESPONSE EXAMPLE</h4>
+					<pre>{
+
+"_id_": {
+
+"ns": "db_000000000000000000000000.test", "key": [
+[
+
+"_id", 1
+
+]
+], "v": 2
+}
+}</pre>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

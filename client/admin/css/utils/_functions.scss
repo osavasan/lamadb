@@ -1,0 +1,46 @@
+// This file contains all application-wide Sass functions.
+
+// z-index order function
+@function z($name) {
+	@if index($z-indexes, $name) {
+		@return (length($z-indexes) - index($z-indexes, $name)) + 1;
+	}
+	@else {
+		@warn 'There is no item "#{$name}" in this list; choose one of: #{$z-indexes}';
+		@return null;
+	}
+}
+
+$z-indexes: ( 
+	"alerts-wrapper",
+	"modal_tb",
+	"modal-textarea",
+	"modal_item",
+	"fade",
+	"modal",
+	"idea-qna",
+	"select-pop",
+	"pf-open-sidebar",
+	"pf-addsize"
+);
+// use
+// .sampe-class-name {
+//   z-index: z('sampe-class-name');
+// }
+/// Slightly lighten a color
+/// @access public
+/// @param {Color} $color - color to tint
+/// @param {Number} $percentage - percentage of `$color` in returned color
+/// @return {Color}
+@function tint($color, $percentage) {
+	@return mix(white, $color, $percentage);
+}
+
+/// Slightly darken a color
+/// @access public
+/// @param {Color} $color - color to shade
+/// @param {Number} $percentage - percentage of `$color` in returned color
+/// @return {Color}
+@function shade($color, $percentage) {
+	@return mix(black, $color, $percentage);
+}

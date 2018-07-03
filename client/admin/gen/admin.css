@@ -1,0 +1,64 @@
+@font-face {
+	font-family: "admin";
+	src: url("admin.eot?a87f89059c5cbc6c6051c0d3d95d542c?#iefix") format("embedded-opentype"),
+url("admin.woff?a87f89059c5cbc6c6051c0d3d95d542c") format("woff");
+}
+
+.icon {
+	line-height: 1;
+}
+
+.icon:before {
+	font-family: admin !important;
+	font-style: normal;
+	font-weight: normal !important;
+	vertical-align: top;
+}
+
+.icon-close:before {
+	content: "\f101";
+}
+.icon-db:before {
+	content: "\f102";
+}
+.icon-edit:before {
+	content: "\f103";
+}
+.icon-file:before {
+	content: "\f104";
+}
+.icon-folder-open:before {
+	content: "\f105";
+}
+.icon-folder:before {
+	content: "\f106";
+}
+.icon-id:before {
+	content: "\f107";
+}
+.icon-logout3:before {
+	content: "\f108";
+}
+.icon-net:before {
+	content: "\f109";
+}
+.icon-ok:before {
+	content: "\f10a";
+}
+.icon-table:before {
+	content: "\f10b";
+}
+.icon-time:before {
+	content: "\f10c";
+}
+.icon-trash:before {
+	content: "\f10d";
+}
+.icon-tree:before {
+	content: "\f10e";
+}
+.icon-user:before {
+	content: "\f10f";
+}
+
+/*C:\Work\Upwork\MongoManage/client/admin/svgs/close.svg,C:\Work\Upwork\MongoManage/client/admin/svgs/db.svg,C:\Work\Upwork\MongoManage/client/admin/svgs/edit.svg,C:\Work\Upwork\MongoManage/client/admin/svgs/file.svg,C:\Work\Upwork\MongoManage/client/admin/svgs/folder-open.svg,C:\Work\Upwork\MongoManage/client/admin/svgs/folder.svg,C:\Work\Upwork\MongoManage/client/admin/svgs/id.svg,C:\Work\Upwork\MongoManage/client/admin/svgs/logout3.svg,C:\Work\Upwork\MongoManage/client/admin/svgs/net.svg,C:\Work\Upwork\MongoManage/client/admin/svgs/ok.svg,C:\Work\Upwork\MongoManage/client/admin/svgs/table.svg,C:\Work\Upwork\MongoManage/client/admin/svgs/time.svg,C:\Work\Upwork\MongoManage/client/admin/svgs/trash.svg,C:\Work\Upwork\MongoManage/client/admin/svgs/tree.svg,C:\Work\Upwork\MongoManage/client/admin/svgs/user.svgC:\Work\Upwork\MongoManage/client/admin/gen/mmFix*/

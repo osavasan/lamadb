@@ -1,0 +1,176 @@
+// titles styling
+//!
+h1 {
+	margin: $space2 0;
+	color: $text-d;
+	font-size: $fs-xl;
+	font-weight: normal;
+	letter-spacing: 0.03em;
+}
+
+h2 {
+	margin: $space2 0 $space15;
+	color: $text-d;
+	font-size: $fs-l;
+	font-weight: normal;
+	letter-spacing: 0.04em;
+}
+
+h3 {
+	margin: $space2 0 $space2;
+	color: $text-d;
+	font-size: $fs-l;
+	font-weight: normal;
+	letter-spacing: 0.05em;
+	a {
+		text-decoration: none;
+	}
+}
+
+//!
+h4 {
+	margin: $space2 0 $space;
+	color: $text-d;
+	font-size: $fs;
+	font-weight: normal;
+	letter-spacing: 0.05em;
+	text-align: left;
+}
+
+// text blocks
+p {
+	margin: $space 0;
+	text-align: left;
+	word-wrap: break-word;
+}
+
+pre {
+	margin: $space 0;
+}
+
+blockquote {
+	background: $bg-d;
+	margin: $space15 0 $space15 20%;
+	padding: 1rem;
+	width: 80%;
+	border: 1px solid $divider;
+}
+
+ul {
+	margin: $space 0;
+	list-style-position: inside;
+	padding-left: 3px;
+	list-style-type: disc;
+}
+
+li {
+	margin: $space 0;
+}
+
+// links
+a {
+	text-decoration: underline;
+	transition: all 0.2s;
+	color: inherit;
+	&:hover {
+		color: $primary-d;
+	}
+}
+
+//!
+// inputs, buttons and labels
+input:not([type=submit]):not([type=file]):not([type=radio]):not([type=checkbox]),
+textarea {
+	display: inline-block;
+	vertical-align: top;
+	width: 100%;
+	padding: 6px 9px;
+	border: 2px solid $divider;
+	border-radius: 3px;
+	font-size: $fs-s;
+	height: 35px;
+	line-height: 1.5;
+	transition: border-color 0.3s;
+	&.m_small {
+		width: calc(100% - 8px);
+		padding: 3px 9px;
+		border: none;
+		border-radius: 0px;
+		font-size: 13px;
+		height: 24px;
+		margin-left: 5px;
+		&:focus {
+			border: none;
+		}
+	}
+	&.m_wrong {
+		border: 2px solid $danger;
+		&:focus {
+			border: 2px solid $danger;
+		}
+	}
+	&:focus {
+		border: 2px solid $text-d;
+	}
+	&::-webkit-input-placeholder {
+		color: #BEB6C0;
+	}
+	&.m_no-group {
+		border-bottom: 2px solid $primary-l;
+		padding: 9px $space 4px;
+		&:focus {
+			border-bottom: 2px solid $primary-d;
+			margin-bottom: 0;
+		}
+	}
+	&.m_dark {
+		border: 2px solid $text;
+		&:focus {
+			border: 2px solid $text;
+			background: $text-l;
+		}
+	}
+}
+
+textarea {
+	resize: vertical;
+	border-right: 1px solid $primary-l;
+	&:focus {
+		border-right: 2px solid $primary-d;
+	}
+}
+
+//buttons
+button {
+	cursor: pointer;
+	display: inline-block;
+	vertical-align: top;
+}
+
+//!
+label {
+	display: block;
+	width: 100%;
+	margin: $space 0 $space2;
+	.label-text {
+		margin-bottom: 0;
+	}
+}
+
+// images
+img {
+	display: inline-block;
+	vertical-align: top;
+	max-width: 100%;
+	height: auto;
+}
+
+// split line
+hr {
+	margin: $space 0;
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 1px solid $text-ll;
+	padding: 0;
+}

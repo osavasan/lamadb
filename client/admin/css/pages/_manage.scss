@@ -1,0 +1,270 @@
+.sidebar {
+	width: 360px;
+	background: $primary;
+	.logo {
+		height: 36px;
+		margin-left: 12px;
+	}
+}
+
+.api-link {
+	color: $text;
+	&:hover {
+		color: $accent;
+	}
+}
+
+.logo-row {
+	height: 50px;
+	padding: 10px 0;
+	&_text {
+		display: inline-block;
+		vertical-align: top;
+		padding-top: 10px;
+		font-size: $fs-xl;
+		color: $text;
+	}
+	&.m_auth {
+		padding: 0;
+		text-decoration: none;
+		.logo-row_text {
+			font-size: 34px;
+		}
+	}
+}
+
+.db-row {
+	&:last-of-type {
+		margin-bottom: 20px;
+	}
+	&_title {
+		position: relative;
+		padding: 10px 15px;
+		border-top: 1px solid $text;
+		color: $text-l;
+		font-size: 16px;
+		cursor: pointer;
+		.btn.m_danger {
+			display: none;
+			border-radius: 2px;
+    		height: 22px;
+		}
+		&:hover,
+		&.m_active {
+			background: $primary-l;
+		}
+		&.m_active {
+			background: $primary-l;
+			border-top: 1px solid $text-w;
+			.btn.m_danger {
+				display: inline-block;
+			}
+		}
+		.icon-db {
+			margin-right: 10px;
+			font-size: 18px;
+		}
+		&+.db-row_tree {
+			display: none;
+		}
+		&.m_active+.db-row_tree {
+			display: block;
+		}
+	}
+	&_tree>ul {
+		margin-left: 0 !important;
+		&:before {
+			display: none !important;
+		}
+		&:after {
+			display: none !important;
+		}
+	}
+	&_tree>ul>li {
+		&:before {
+			display: none !important;
+		}
+		&:after {
+			display: none !important;
+		}
+	}
+	&_tree {
+		padding: 10px 13px;
+		ul {
+			margin: 0px 0px 0px 20px;
+			list-style: none;
+			li {
+				font-size: 16px;
+				position: relative;
+				&>span {
+					position: absolute;
+					@include truncate(96%);
+					max-width: calc(100% - 80px);
+					left: 18px;
+					top: 2px;
+				}
+				&:before {
+					position: absolute;
+					left: -15px;
+					top: 0px;
+					content: '';
+					display: block;
+					border-left: 1px solid $text-l;
+					height: 1em;
+					border-bottom: 1px solid $text-l;
+					width: 10px;
+				}
+				&:after {
+					position: absolute;
+					left: -15px;
+					bottom: -7px;
+					content: '';
+					display: block;
+					border-left: 1px solid $text-l;
+					height: 100%;
+				}
+				&:last-child {
+					&:after {
+						display: none
+					}
+				}
+				label {
+					display: none;
+					text-align: right;
+					width: calc(100% - 80px);
+					margin: 0px 0 0px;
+					.btn {
+						font-size: 13px;
+						padding-top: 5px;
+					}
+				}
+				label.m_active {
+					display: inline-block;
+				}
+				span {
+					display: inline-block;
+					padding: 0 5px;
+					cursor: pointer;
+					&~.btn {
+						display: none;
+					}
+					&.m_active {
+						color: $text-l;
+						&~.btn {
+							display: inline-block;
+						}
+						&~label {
+							display: inline-block;
+						}
+					}
+				}
+				i {
+					font-size: 16px;
+					color: $text-l;
+				}
+				.icon-folder-open {
+					display: none;
+				}
+				&.m_active>span {
+					color: $text-l;
+				}
+				&.m_active>.icon-folder {
+					display: none;
+				}
+				&.m_active>.icon-folder-open {
+					display: inline-block;
+				}
+			}
+		}
+		&:active {}
+	}
+}
+
+//docs
+.docs {
+	width: 400px;
+	border-right: 2px solid $divider;
+	.btn {
+		margin-right: 30px;
+	}
+}
+
+.doc-item {
+	position: relative;
+	cursor: pointer;
+	line-height: 1.4;
+	padding-right: 30px;
+	&_code {
+		padding: $space 0;
+		display: inline-block;
+		width: 100%;
+		height: 100%;
+		padding-left: $space;
+		&:hover {
+			background: $bg-d;
+		}
+		&.m_active {
+			background: $bg-dd;
+		}
+		&.m_active+.doc-item_remove {
+			display: inline-block;
+		}
+	}
+	&_remove {
+		display: none;
+		&:before {
+			display: inline-block;
+			margin-top: 5px;
+			margin-left: 6px;
+		}
+	}
+}
+
+.q-editor-box {
+	.ace_editor {
+		height: 150px !important;
+	}
+}
+
+.document-title {
+	position: absolute;
+	left: 0;
+	top: -20px;
+	color: $text-d;
+}
+
+.ace_editor {
+	height: calc(100vh - 316px);
+}
+
+.query-title {
+	position: absolute;
+	left: 0;
+	top: -5px;
+	display: inline-block;
+	vertical-align: top;
+	font-size: 15px;
+	float: left;
+	&.m_small {
+		font-size: 15px;
+	}
+}
+
+.docs-title {
+	position: absolute;
+	right: 0;
+	top: 0;
+	display: inline-block;
+	vertical-align: top;
+	font-size: 15px;
+	float: left;
+	&.m_small {
+		font-size: 15px;
+	}
+}
+
+.warring-text {
+	display: inline-block;
+	color: $danger;
+	padding: 5px 15px;
+}

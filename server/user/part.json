@@ -1,0 +1,20 @@
+{
+	"name": "User",
+	"router": [{
+		"name": "Crud",
+		"src": "crud.js"
+	}, {
+		"name": "Auth",
+		"src": "auth.js"
+	}],
+	"dependencies": {
+		"passport-local": "*",
+		"bcrypt-nodejs": "*",
+		"mongoose": "*",
+		"uuid": "*",
+		"ontime": "*",
+		"nodemailer": "*",
+		"nodemailer-sendinblue-transport": "*",
+		"async": "*"
+	}
+}
